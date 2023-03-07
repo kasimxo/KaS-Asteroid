@@ -140,7 +140,7 @@ public class Main extends JPanel {
 					} else {
 						//Aquí checkeamos si le hemos dado a algún enemigo y lo eliminamos si eso
 						for (Enemy enemy : enemys) {
-							if(Math.abs(proyectil.getPosX()-enemy.getPosX())<proyectil.getRadio() && Math.abs(proyectil.getPosY()-enemy.getPosY())<proyectil.getRadio()) {
+							if(Math.abs(proyectil.getPosX()-enemy.getPosX())<proyectil.getRadio()+enemy.getSize() && Math.abs(proyectil.getPosY()-enemy.getPosY())<proyectil.getRadio()+enemy.getSize()) {
 								limpieza.add(enemy);
 								limpieza.add(proyectil);
 							}
@@ -177,6 +177,7 @@ public class Main extends JPanel {
 	 * Cada frame genera un valor aleatorio, si pasa el test, genera un enemigo
 	 */
 	protected static void spawnEnemy() {
+		//Tiene un hardcap de 100 enemigos por pantalla
 		if(Math.random()>0 && enemys.size()<100) {
 			enemys.add(new Enemy());
 		}

@@ -4,6 +4,7 @@ import java.awt.Point;
 
 public class Center implements GameComponent {
 	
+	private int health = 5;
 	private double posX;
 	private double posY;
 	private int radio;
@@ -65,13 +66,26 @@ public class Center implements GameComponent {
 	
 	//Falta que tenga en cuenta la rotación del objeto para poder avanzar en esa línea
 	public void actualizarPos() {
+		
+		
 		rotX += incRot;
 		
 		double calX = posX - speedY * Math.sin(rotX) + speedX * Math.sin(rotX+1.57079633);
 		double calY = posY + speedY * Math.cos(rotX) - speedX * Math.cos(rotX+1.57079633);
 		
-		
-		setPosition(calX, calY);
+		if(calX>Main.ventana.getWidth()) {
+			calX = Main.ventana.getWidth();
+		} else if(calX<0) {
+			calX = 0;
+		} else if(calY>Main.ventana.getHeight()) {
+			calY = Main.ventana.getHeight();
+		} else if(calY<0) {
+			calY = 0;
+		} else {
+			setPosition(calX, calY);
+		}
+			
+
 	}
 
 	public int[] getY() {
@@ -165,5 +179,13 @@ public class Center implements GameComponent {
 
 	public void setIncRot(double incRot) {
 		this.incRot = incRot;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
 	}
 }

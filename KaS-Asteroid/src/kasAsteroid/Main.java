@@ -126,30 +126,45 @@ public class Main extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(proy.size());
 				
-				spawnEnemy();
-				spawnEnemy();
-				spawnEnemy();
-				spawnEnemy();
-				spawnEnemy();
-				spawnEnemy();
-				spawnEnemy();
-				spawnEnemy();
+				if(nucleo.getHealth()==0) {
+					timer.stop();
+				}
+				
 				spawnEnemy();
 				
 				for (Proyectil proyectil : proy) {
 					proyectil.actualizarPos();
 					if (proyectil.getPosX()>ventana.getWidth() || proyectil.getPosX()<0 || proyectil.getPosY()>ventana.getHeight() || proyectil.getPosY()<0) {
 						limpieza.add(proyectil);
+					} else {
+						//Aquí checkeamos si le hemos dado a algún enemigo y lo eliminamos si eso
+						for (Enemy enemy : enemys) {
+							if(Math.abs(proyectil.getPosX()-enemy.getPosX())<proyectil.getRadio() && Math.abs(proyectil.getPosY()-enemy.getPosY())<proyectil.getRadio()) {
+								limpieza.add(enemy);
+								limpieza.add(proyectil);
+							}
+						}
 					}
 				}
-				for (Object proyectil : limpieza) {
-					proy.remove(proyectil);
+				
+				for (Enemy enemy : enemys) {
+					if(Math.abs(enemy.getPosX()-nucleo.getPosX())<nucleo.getRadio() && Math.abs(enemy.getPosY()-nucleo.getPosY())<nucleo.getRadio()) {
+						limpieza.add(enemy);
+						nucleo.setHealth(nucleo.getHealth()-1);
+					}
+				}
+				
+				for (Object obj : limpieza) {
+					//Aquí eliminamos los enemigos o proyectiles.
+					if(obj instanceof Proyectil) {
+						proy.remove(obj);
+					} else if (obj instanceof Enemy) {
+						enemys.remove(obj);
+					}
 				}
 				limpieza.clear();
 				
-				System.out.println(nucleo.getPosX() + " " + nucleo.getPosY());
 				
 				nucleo.actualizarPos();
 				ventana.repaint();
@@ -198,7 +213,7 @@ public class Main extends JPanel {
         ventana.addKeyListener(klistener);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         try {
-			ventana.setIconImage(ImageIO.read(new File("C:\\Users\\Andrés\\workspace\\KaS-Asteroid\\imgs\\gameIcon.png")));
+			ventana.setIconImage(ImageIO.read(new File("C:\\Users\\Andrés\\git\\KaS-Asteroid\\KaS-Asteroid\\imgs\\gameIcon.png")));
 		} catch (IOException e) {
 			System.err.println("No se ha encontrado la imagen: gameIcon.png");
 		}
@@ -225,8 +240,14 @@ public class Main extends JPanel {
 			}
 		}
 		
+		//Aquí es donde dibujamos al jugador
 		g.setColor(Color.gray);
 		g.fillPolygon(nucleo.calculoPos(0), nucleo.calculoPos(1), 4);
+		g.setColor(Color.red);
+		g.fillRect((int) nucleo.getPosX()-10, (int) nucleo.getPosY()+15, 20, 5);
+		g.setColor(Color.green);
+		g.fillRect((int) nucleo.getPosX()-10, (int) nucleo.getPosY()+15, nucleo.getHealth()*4, 5);
+		
 	}
 
 }

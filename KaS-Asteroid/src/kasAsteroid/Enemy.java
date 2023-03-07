@@ -39,7 +39,6 @@ public class Enemy implements GameComponent {
 		double dY = posY-Main.nucleo.getPosY();
 		double dX = posX-Main.nucleo.getPosX();
 		double rotX = Math.asin(dY/(Math.sqrt(dX*dX+dY*dY)));
-		System.out.println(rotX);
 		
 		double vectorX = speed * Math.cos(rotX);
 		double vectorY = speed * Math.cos(rotX);

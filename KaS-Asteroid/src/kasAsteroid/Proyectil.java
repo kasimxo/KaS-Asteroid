@@ -13,9 +13,9 @@ public class Proyectil implements GameComponent {
 	private static int speed = -3;
 	
 	public Proyectil() {
-		this.posX = Main.nucleo.getPosX();
-		this.posY = Main.nucleo.getPosY();
-		this.rotX = Main.nucleo.getRotX();
+		this.posX = Main.player.getPosX();
+		this.posY = Main.player.getPosY();
+		this.rotX = Main.player.getRotX();
 	}
 	
 	public double getPosX() {

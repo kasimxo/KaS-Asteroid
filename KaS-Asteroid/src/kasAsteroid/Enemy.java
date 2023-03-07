@@ -19,13 +19,13 @@ public class Enemy implements GameComponent {
 		
 		double auxY =  Math.sqrt(Math.abs( width*width - Math.pow((auxX-width/2),2)));
 		
-		auxY = auxY + Main.nucleo.getPosY() - 300;
+		auxY = auxY + Main.player.getPosY() - 300;
 		
 		if(Math.random()>0.5) {
-			double a = auxY-Main.nucleo.getPosY();
-			auxY = Main.nucleo.getPosY()-a;
+			double a = auxY-Main.player.getPosY();
+			auxY = Main.player.getPosY()-a;
 		}
-		this.posX = auxX + Main.nucleo.getPosX() - 300;
+		this.posX = auxX + Main.player.getPosX() - 300;
 		this.posY = auxY;
 		
 	}
@@ -36,15 +36,15 @@ public class Enemy implements GameComponent {
 		
 		//El movimiento sigue sin estar bien, se mueve de forma... hiperbólica???
 		
-		double dY = posY-Main.nucleo.getPosY();
-		double dX = posX-Main.nucleo.getPosX();
+		double dY = posY-Main.player.getPosY();
+		double dX = posX-Main.player.getPosX();
 		
 		double rotX = Math.asin(dY/(Math.sqrt(dX*dX+dY*dY)));
 		
 		double vectorX = speed * Math.cos(rotX);
 		double vectorY = speed * Math.sin(rotX) *-1;
 		
-		if(posX<Main.nucleo.getPosX())
+		if(posX<Main.player.getPosX())
 			vectorX *= -1;
 		
 		double calX = posX - vectorX;

@@ -25,7 +25,7 @@ public class Main extends JPanel {
 	 */
 	private static final long serialVersionUID = 5834674684066542115L;
 	public static JFrame ventana;
-	public static Center nucleo;
+	public static Center player;
 	public static Timer timer;
 	public static ActionListener alistener;
 	public static KeyListener klistener;
@@ -53,17 +53,17 @@ public class Main extends JPanel {
             public void keyPressed(KeyEvent e) {
                 switch(e.getKeyCode()) {
                 case KeyEvent.VK_W:
-                	nucleo.setSpeedY(-1);
+                	player.setSpeedY(-1);
                     break;
                 case KeyEvent.VK_S:
-                	nucleo.setSpeedY(1);
+                	player.setSpeedY(1);
                     break;
                 case KeyEvent.VK_A:
-                	nucleo.setIncRot(-0.1);
+                	player.setIncRot(-0.1);
                 	//nucleo.setSpeedX(-1);
                     break;
                 case KeyEvent.VK_D:
-                	nucleo.setIncRot(0.1);
+                	player.setIncRot(0.1);
                 	//nucleo.setSpeedX(1);
                     break;
                 case KeyEvent.VK_UP:
@@ -92,17 +92,17 @@ public class Main extends JPanel {
 			public void keyReleased(KeyEvent e) {
 				 switch(e.getKeyCode()) {
 	                case KeyEvent.VK_W:
-	                	nucleo.setSpeedY(0);
+	                	player.setSpeedY(0);
 	                    break;
 	                case KeyEvent.VK_S:
-	                	nucleo.setSpeedY(0);
+	                	player.setSpeedY(0);
 	                    break;
 	                case KeyEvent.VK_A:
-	                	nucleo.setIncRot(0);
+	                	player.setIncRot(0);
 	                	//nucleo.setSpeedX(0);
 	                    break;
 	                case KeyEvent.VK_D:
-	                	nucleo.setIncRot(0);
+	                	player.setIncRot(0);
 	                	//nucleo.setSpeedX(0);
 	                    break;
 	                case KeyEvent.VK_UP:
@@ -127,7 +127,7 @@ public class Main extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				if(nucleo.getHealth()==0) {
+				if(player.getHealth()==0) {
 					timer.stop();
 				}
 				
@@ -149,9 +149,9 @@ public class Main extends JPanel {
 				}
 				
 				for (Enemy enemy : enemys) {
-					if(Math.abs(enemy.getPosX()-nucleo.getPosX())<nucleo.getRadio() && Math.abs(enemy.getPosY()-nucleo.getPosY())<nucleo.getRadio()) {
+					if(Math.abs(enemy.getPosX()-player.getPosX())<player.getRadio() && Math.abs(enemy.getPosY()-player.getPosY())<player.getRadio()) {
 						limpieza.add(enemy);
-						nucleo.setHealth(nucleo.getHealth()-1);
+						player.setHealth(player.getHealth()-1);
 					}
 				}
 				
@@ -166,7 +166,7 @@ public class Main extends JPanel {
 				limpieza.clear();
 				
 				
-				nucleo.actualizarPos();
+				player.actualizarPos();
 				ventana.repaint();
 			}
         };		
@@ -189,10 +189,10 @@ public class Main extends JPanel {
 	}
 
 	private static void addCenter() {
-		nucleo = new Center();
+		player = new Center();
 		int x = ventana.getWidth()/2;
 		int y = ventana.getHeight()/2;
-		nucleo.setPosition(x,y);
+		player.setPosition(x,y);
 	}
 
 	private static void addVentana() {
@@ -243,11 +243,11 @@ public class Main extends JPanel {
 		
 		//Aquí es donde dibujamos al jugador
 		g.setColor(Color.gray);
-		g.fillPolygon(nucleo.calculoPos(0), nucleo.calculoPos(1), 4);
+		g.fillPolygon(player.calculoPos(0), player.calculoPos(1), 4);
 		g.setColor(Color.red);
-		g.fillRect((int) nucleo.getPosX()-10, (int) nucleo.getPosY()+15, 20, 5);
+		g.fillRect((int) player.getPosX()-10, (int) player.getPosY()+15, 20, 5);
 		g.setColor(Color.green);
-		g.fillRect((int) nucleo.getPosX()-10, (int) nucleo.getPosY()+15, nucleo.getHealth()*4, 5);
+		g.fillRect((int) player.getPosX()-10, (int) player.getPosY()+15, player.getHealth()*4, 5);
 		
 	}
 

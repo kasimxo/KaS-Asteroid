@@ -36,8 +36,13 @@ public class Enemy implements GameComponent {
 		
 		//El movimiento sigue sin estar bien, se mueve de forma... hiperbólica???
 		
+<<<<<<< HEAD
 		double dY = posY-Main.player.getPosY();
 		double dX = posX-Main.player.getPosX();
+=======
+		double dY = posY-Main.nucleo.getPosY();
+		double dX = posX-Main.nucleo.getPosX();
+>>>>>>> branch 'main' of git@github.com:kasimxo/KaS-Asteroid.git
 		
 		double rotX = Math.asin(dY/(Math.sqrt(dX*dX+dY*dY)));
 		

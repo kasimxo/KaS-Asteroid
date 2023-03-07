@@ -25,7 +25,7 @@ public class Main extends JPanel {
 	 */
 	private static final long serialVersionUID = 5834674684066542115L;
 	public static JFrame ventana;
-	public static Center player;
+	public static Player player;
 	public static Timer timer;
 	public static ActionListener alistener;
 	public static KeyListener klistener;
@@ -66,16 +66,6 @@ public class Main extends JPanel {
                 	player.setIncRot(0.1);
                 	//nucleo.setSpeedX(1);
                     break;
-                case KeyEvent.VK_UP:
-                    break;
-                case KeyEvent.VK_DOWN:
-                    break;
-                case KeyEvent.VK_LEFT:
-                	//nucleo.setIncRot(-0.1);
-                    break;
-                case KeyEvent.VK_RIGHT:
-                	//nucleo.setIncRot(0.1);
-                    break;
                 case KeyEvent.VK_SPACE:
                 	proy.add(new Proyectil());
                 	break;
@@ -85,7 +75,6 @@ public class Main extends JPanel {
 			@Override
 			public void keyTyped(KeyEvent e) {
 				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
@@ -104,16 +93,6 @@ public class Main extends JPanel {
 	                case KeyEvent.VK_D:
 	                	player.setIncRot(0);
 	                	//nucleo.setSpeedX(0);
-	                    break;
-	                case KeyEvent.VK_UP:
-	                    break;
-	                case KeyEvent.VK_DOWN:
-	                    break;
-	                case KeyEvent.VK_LEFT:
-	                	//nucleo.setIncRot(0);
-	                    break;
-	                case KeyEvent.VK_RIGHT:
-	                	//nucleo.setIncRot(0);
 	                    break;
 				 }
 			}
@@ -189,7 +168,7 @@ public class Main extends JPanel {
 	}
 
 	private static void addCenter() {
-		player = new Center();
+		player = new Player();
 		int x = ventana.getWidth()/2;
 		int y = ventana.getHeight()/2;
 		player.setPosition(x,y);

@@ -2,7 +2,7 @@ package kasAsteroid;
 
 import java.awt.Point;
 
-public class Center implements GameComponent {
+public class Player implements GameComponent {
 	
 	private int health = 5;
 	private double posX;
@@ -15,7 +15,7 @@ public class Center implements GameComponent {
 	private int[] x;
 	private int[] y;
 	
-	public Center() {
+	public Player() {
 		this.radio = 10;
 		this.posX = 0;
 		this.posY = 0;
